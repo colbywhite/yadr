@@ -16,6 +16,11 @@ Plugin 'scrooloose/nerdtree'	" project tree browser
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-syntastic/syntastic'	" syntax
 
+" -- tagging
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
+Plugin 'majutsushi/tagbar'
+
 call vundle#end()            " Vundle plugins go above
 filetype plugin indent on    " turn on indent for plugin files
 
@@ -58,4 +63,15 @@ augroup mySyntastic	" define group
   au!
   au FileType tex let b:syntastic_mode='passive'	" turn auto syntax for LaTeX files; not sure I need this
 augroup END
+
+" -- xolox/vim-easytags
+set tags=./tags;,~/.vimtags	" where to find tag files
+let g:easytags_events=['BufReadPost', 'BufWritePost']	" generate tags on startup, save
+let g:easytags_async=1
+let g:easytags_dynamic_files=2	" save tag files in project
+let g:easytags_resolve_links=1	" resolve symbolic links
+let g:easytags_suppress_ctags_warnings=1	" hide warning if no ctags yet
+
+" -- majutsushi/tagbar
+nmap <silent> <Leader>b :TagbarToggle<CR>	" \b == open/close Tagbar
 
